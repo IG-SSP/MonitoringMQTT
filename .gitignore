@@ -1,0 +1,7 @@
+node_modules/
+npm-debug.log*
+.env
+mosquitto/data/*
+!mosquitto/data/.gitkeep
+mosquitto/log/*
+!mosquitto/log/.gitkeep
