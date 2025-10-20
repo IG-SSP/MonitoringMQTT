@@ -48,6 +48,19 @@ prepare_dirs(){
   chown -R pi:pi "$STACK_DIR"
 }
 
+ensure_env(){
+  if [ ! -f "$STACK_DIR/.env" ]; then
+    echo "[*] Создаю .env с дефолтами…"
+    cat > "$STACK_DIR/.env" <<'EOF'
+AGENT_PORT=8080
+MOSQ_PORT=1883
+NODE_ENV=production
+EOF
+    chown pi:pi "$STACK_DIR/.env" || true
+  fi
+}
+
+
 compose_up(){
   log "Собираем и поднимаем стек…"
   (cd "$STACK_DIR" && docker compose up -d --build)
@@ -96,6 +109,7 @@ main(){
   ensure_packages
   install_docker
   prepare_dirs
+  ensure_env
   compose_up
   write_systemd
   health
