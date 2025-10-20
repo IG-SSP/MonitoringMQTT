@@ -1,0 +1,2 @@
+# MonitoringMQTT
+Мониторинг серверов iRidi
